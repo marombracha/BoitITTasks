@@ -8,7 +8,7 @@ with open('Flights.csv', 'r') as file:
 
 print(flights_list)
 
-flights_list.sort(key=lambda flight_time: datetime.strptime(flight_time['Arrival'][:-1], '%H:%M').time())
+flights_list.sort(key=lambda flight_time: datetime.strptime(flight_time['Arrival'], '%H:%M').time())
 
 print(flights_list)
 
@@ -18,6 +18,7 @@ for flight in flights_list:
     time_change = datetime.strptime(flight['Departure '][:-1], '%H:%M') - datetime.strptime(flight['Arrival'] , '%H:%M')
     if success_counter < 20 and time_change > timedelta(hours=3):
         flight['success'] = True
+        success_counter += 1
     else:
         flight['success'] = False
 
